@@ -1,90 +1,81 @@
-# Stocktree Auth API Documentation
+Tentu, berikut adalah contoh Markdown file untuk aplikasi dengan arsitektur hexagonal menggunakan bahasa TypeScript:
+
+```markdown
+# Hexagonal Architecture with TypeScript
 
 ## Overview
 
-The Stocktree Auth API is a Node.js application built with the Express framework, written in TypeScript. It provides authentication-related functionality for the Stocktree project.
+This project demonstrates the implementation of a Hexagonal Architecture using TypeScript. The Hexagonal Architecture, also known as Ports and Adapters, emphasizes the separation of concerns and the independence of application core logic from external concerns such as databases, user interfaces, and frameworks.
 
-## Table of Contents
+## Project Structure
 
-- [Stocktree Auth API Documentation](#stocktree-auth-api-documentation)
-  - [Overview](#overview)
-  - [Table of Contents](#table-of-contents)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Configuration](#configuration)
-  - [Usage](#usage)
-  - [Database](#database)
-  - [Contributing](#contributing)
-  - [License](#license)
-
-## Prerequisites
-
-Before running the Stocktree Auth API, ensure you have the following prerequisites installed:
-
-- [Node.js](https://nodejs.org/) (v14.0.0 or higher)
-- [npm](https://www.npmjs.com/) (v6.0.0 or higher)
-- [TypeScript](https://www.typescriptlang.org/) (v4.0.0 or higher)
-- [Knex.js](http://knexjs.org/) (v0.95.0 or higher)
-- [MySQL](https://www.mysql.com/) (v8.0.0 or higher)
-
-## Installation
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/ahsanf/stocktree-auth-api.git
-cd stocktree-auth-api
+```
+project-root
+|-- src
+|   |-- application
+|   |   |-- usecases
+|   |   |   |-- createOrder.ts
+|   |   |   |-- updateOrder.ts
+|   |   |-- ports
+|   |   |   |-- orderRepository.ts
+|   |   |-- services
+|   |       |-- orderService.ts
+|   |-- domain
+|   |   |-- entities
+|   |   |   |-- order.ts
+|   |   |-- value-objects
+|   |       |-- orderId.ts
+|   |-- infrastructure
+|   |   |-- adapters
+|   |   |   |-- in-memory-order-repository.ts
+|   |   |-- main.ts
+|-- test
+|   |-- application
+|   |   |-- usecases
+|   |   |   |-- createOrder.test.ts
+|   |   |   |-- updateOrder.test.ts
+|   |   |-- ports
+|   |       |-- orderRepository.test.ts
+|   |-- domain
+|   |   |-- entities
+|   |       |-- order.test.ts
+|   |   |-- value-objects
+|   |       |-- orderId.test.ts
+|   |   |-- services
+|   |       |-- orderService.test.ts
+|   |-- infrastructure
+|       |-- adapters
+|           |-- in-memory-order-repository.test.ts
+|-- tsconfig.json
+|-- package.json
+|-- README.md
 ```
 
-2. Install dependencies:
+## Components
 
-```bash
-npm install
+- **Application Layer**: Contains use cases that define the application's behavior. These use cases interact with the domain layer through ports.
+
+- **Domain Layer**: Defines the core business logic, including entities and value objects.
+
+- **Infrastructure Layer**: Contains adapters that implement ports defined in the application layer. Also includes the `main.ts` file where dependencies are wired together.
+
+- **Test Directory**: Corresponding test files for each component to ensure the correctness of the implementation.
+
+## How to Run
+
+1. Clone this repository.
+2. Install dependencies using `npm install`.
+3. Run the application using `npm start`.
+
+## Testing
+
+Run tests using `npm test` to ensure the correctness of the application logic.
+
+## Dependencies
+
+- Node.js
+- TypeScript
+- Jest (for testing)
 ```
 
-3. Build the TypeScript code:
-
-```bash
-npm run build
-```
-
-## Configuration
-
-Configure the application by creating a `.env` file in the root directory:
-
-```env
-cp .env .env.example
-```
-
-## Usage
-
-Run the application in development mode:
-
-```bash
-npm run dev
-```
-
-Or run in production mode:
-
-```bash
-npm start
-```
-
-## Database
-
-The Stocktree Auth API uses Knex.js as the query builder for PostgreSQL. Migrations and seeds are located in the `migrations` directory.
-
-To run migrations and seeds, use the following commands:
-
-```bash
-npm run knex migrate:latest
-npm run knex seed:run
-```
-
-## Contributing
-
-Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+Silakan sesuaikan dengan struktur proyek dan ketergantungan spesifik dari proyek TypeScript Hexagonal Architecture Anda.
