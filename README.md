@@ -1,5 +1,3 @@
-Tentu, berikut adalah contoh Markdown file untuk aplikasi dengan arsitektur hexagonal menggunakan bahasa TypeScript:
-
 ```markdown
 # Hexagonal Architecture with TypeScript
 
