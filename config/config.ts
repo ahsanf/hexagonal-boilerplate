@@ -2,42 +2,93 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const MYSQL_DATABASE = process.env.MYSQL_DATABASE || "refreshtoken";
-const MYSQL_USERNAME = process.env.MYSQL_USERNAME || "root";
-const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD || "tarekAA123";
-const MYSQL_HOST = process.env.MYSQL_HOST || "127.0.0.1";
+const DB_HOST = process.env.DB_HOST ?? ''
+const DB_NAME = process.env.DB_NAME ?? ''
+const DB_USERNAME = process.env.DB_USERNAME ?? ''
+const DB_PASSWORD = process.env.DB_PASSWORD ?? ''
+const DB_PORT = process.env.DB_PORT ?? ''
 
-const MYDATABASE = {
-  host: MYSQL_HOST,
-  username: MYSQL_USERNAME,
-  password: MYSQL_PASSWORD,
-  database: MYSQL_DATABASE,
-};
-const API_VERSION = process.env.API_VERSION;
-const SERVER_HOSTNAME = process.env.SERVER_HOSTNAME || "localhost";
-const SERVER_PORT = process.env.SERVER_PORT || "3500";
-const SERVER_TOKEN_EXPRIRETIME = process.env.SERVER_TOKEN_EXPRIRETIME || 3600;
+const APP_PORT = process.env.APP_PORT ?? ''
+const APP_SALT = process.env.APP_SALT ?? ''
+const APP_SALT_IV = process.env.APP_SALT_IV ?? ''
+const APP_ENCRYPT_METHOD = process.env.APP_ENCRYPT_METHOD ?? ''
+const API_VERSION = process.env.API_VERSION ?? ''
+const APP_COOKIE_URL = process.env.APP_COOKIE_URL ?? ''
 
-const SERVER_TOKEN_SECRET = process.env.SERVER_TOKEN_SECRET || "supersecret";
-const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || "superrefresh";
-const REFRESH_TOKEN_EXPIRETIME = process.env.REFRESH_TOKEN_EXPIRETIME || 86400;
-const VALIDATION_CODE_EXPIRETIME =
-  process.env.VALIDATION_CODE_EXPIRETIME || 900;
+const MAIL_HOST = process.env.MAIL_HOST ?? ''
+const MAIL_PORT = process.env.MAIL_PORT ?? ''
+const MAIL_USER = process.env.MAIL_USER ?? ''
+const MAIL_PASSWORD = process.env.MAIL_PASSWORD ?? ''
+const MAIL_SECURE = process.env.MAIL_SECURE ?? ''
 
-const SERVER = {
-  hostname: SERVER_HOSTNAME,
-  port: SERVER_PORT,
+const SERVER_TOKEN_EXPRIRETIME = process.env.SERVER_TOKEN_EXPRIRETIME ?? 3600
+const VALIDATION_CODE_EXPIRETIME = process.env.VALIDATION_CODE_EXPIRETIME ?? 900
+const REFRESH_TOKEN_EXPIRETIME = process.env.REFRESH_TOKEN_EXPIRETIME ?? 86400
+
+const MONGO_DB_HOST = process.env.MONGO_DB_HOST ?? ''
+const MONGO_DB_USER = process.env.MONGO_DB_USER ?? ''
+const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD ?? ''
+
+const REDIS_URL = process.env.REDIS_URL ?? ''
+const REDIS_ENABLE = process.env.REDIS_ENABLE ?? false
+
+const APP_CONFIG = {
+  appPort: APP_PORT,
+  appSalt: APP_SALT,
+  appSaltIv: APP_SALT_IV,
+  appEncryptMethod: APP_ENCRYPT_METHOD,
   apiVersion: API_VERSION,
-  code: VALIDATION_CODE_EXPIRETIME,
-  token: {
-    expireTime: SERVER_TOKEN_EXPRIRETIME,
-    secret: SERVER_TOKEN_SECRET,
-    refresh: REFRESH_TOKEN_SECRET,
-    refreshTokenTime: REFRESH_TOKEN_EXPIRETIME,
+  appCookieUrl: APP_COOKIE_URL,
+  redisEnable: REDIS_ENABLE,
+}
+
+const SERVER_CONFIG = {
+  tokenExpireTime: SERVER_TOKEN_EXPRIRETIME,
+  validationCodeExpireTime: VALIDATION_CODE_EXPIRETIME,
+  refreshTokenExpireTime: REFRESH_TOKEN_EXPIRETIME,
+}
+
+const MYSQL_CONFIG = {
+  client: 'mysql',
+  connection: {
+    host: DB_HOST,
+    user: DB_USERNAME,
+    password: DB_PASSWORD,
+    database: DB_NAME,
   },
+  migrations: {
+    tableName: 'knex_migrations',
+    extension: 'ts',
+  },
+  debug: true,
 };
 
-export const config = {
-  server: SERVER,
-  database: MYDATABASE,
+const MAIL_CONFIG = {
+  host: MAIL_HOST,
+  port: MAIL_PORT,
+  auth: {
+    user: MAIL_USER,
+    pass: MAIL_PASSWORD,
+  }
+}
+
+const MONGO_CONFIG = {
+  host: MONGO_DB_HOST,
+  user: MONGO_DB_USER,
+  password: MONGO_DB_PASSWORD,
+}
+
+const REDIS_CONFIG = {
+  url: REDIS_URL,
+}
+
+export const config: any = {
+  app: APP_CONFIG,
+  server: SERVER_CONFIG,
+  database: {
+    mysql : MYSQL_CONFIG,
+    mongo: MONGO_CONFIG,
+    redis: REDIS_CONFIG,
+  },
+  mail: MAIL_CONFIG,
 };

@@ -1,6 +1,6 @@
 import { Stats } from "../../../../../domain/stats"
-import { User } from "../../../../../domain/user"
-import { UserRestRequest } from "../entity/request"
+import { Domain } from "../../../../../domain/domain"
+import { DomainRequest } from "../entity/request"
 import { RestResponse } from "../entity/response"
 
 export const dataToRestResponse = (data: any, stats?: Stats): RestResponse => {
@@ -27,16 +27,6 @@ export const errorToRestResponse = (error: any): RestResponse => {
   }
 }
 
-export const userRestRequestToUser = (data: UserRestRequest): User => {
-  return {
-    firstName: data.firstName ?? '', 
-    lastName: data.lastName ?? '',
-    email: data.email ?? '',
-    password: data.password ?? '',
-    isSubsNewLetter: data.isSubsNewLetter ?? false,
-    regionId: data.regionId ?? 0,
-    isVerified: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  }
+export const requestToDomain = (request: DomainRequest): Domain => {
+  throw new Error('Method Not implemented')
 }

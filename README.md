@@ -1,79 +1,75 @@
-```markdown
-# Hexagonal Architecture with TypeScript
+# Hexagonal Architecture Boilerplate with TypeScript
 
-## Overview
+This repository provides a boilerplate for implementing a Hexagonal Architecture using TypeScript. Hexagonal Architecture, also known as Ports and Adapters Architecture, is a software architectural pattern that aims to create loosely coupled application components that are independent of the external interfaces.
 
-This project demonstrates the implementation of a Hexagonal Architecture using TypeScript. The Hexagonal Architecture, also known as Ports and Adapters, emphasizes the separation of concerns and the independence of application core logic from external concerns such as databases, user interfaces, and frameworks.
+## Features
 
-## Project Structure
+- **Hexagonal Architecture**: Implementing a clear hexagonal architecture to separate core business logic from external concerns.
+- **TypeScript**: Utilizing TypeScript for static typing and better maintainability.
+- **Dependency Injection**: Implementing dependency injection to decouple components and facilitate testing.
+- **Test-Driven Development (TDD)**: Encouraging the practice of TDD to ensure code quality and reliability.
+- **Ready-to-Use Structure**: Provides a basic structure to kickstart your project development.
+
+## Getting Started
+
+To get started with this boilerplate, follow these steps:
+
+1. **Clone the Repository**: Clone this repository to your local machine using:
+
+    ```bash
+    git clone https://github.com/ahsanf/hexagonal-boilerplate.git
+    ```
+
+2. **Install Dependencies**: Navigate to the project directory and install dependencies:
+
+    ```bash
+    cd hexagonal-boilerplate
+    npm install
+    ```
+
+3. **Start Development Server**: Start the development server:
+
+    ```bash
+    npm start
+    ```
+
+4. **Build for Production**: When ready to deploy, build the project for production:
+
+    ```bash
+    npm run build
+    ```
+
+5. **Run Tests**: Run tests to ensure everything is working as expected:
+
+    ```bash
+    npm test
+    ```
+
+## Folder Structure
 
 ```
-project-root
-|-- src
-|   |-- application
-|   |   |-- usecases
-|   |   |   |-- createOrder.ts
-|   |   |   |-- updateOrder.ts
-|   |   |-- ports
-|   |   |   |-- orderRepository.ts
-|   |   |-- services
-|   |       |-- orderService.ts
-|   |-- domain
-|   |   |-- entities
-|   |   |   |-- order.ts
-|   |   |-- value-objects
-|   |       |-- orderId.ts
-|   |-- infrastructure
-|   |   |-- adapters
-|   |   |   |-- in-memory-order-repository.ts
-|   |   |-- main.ts
-|-- test
-|   |-- application
-|   |   |-- usecases
-|   |   |   |-- createOrder.test.ts
-|   |   |   |-- updateOrder.test.ts
-|   |   |-- ports
-|   |       |-- orderRepository.test.ts
-|   |-- domain
-|   |   |-- entities
-|   |       |-- order.test.ts
-|   |   |-- value-objects
-|   |       |-- orderId.test.ts
-|   |   |-- services
-|   |       |-- orderService.test.ts
-|   |-- infrastructure
-|       |-- adapters
-|           |-- in-memory-order-repository.test.ts
-|-- tsconfig.json
-|-- package.json
-|-- README.md
+├── src/
+│   ├── adapter/                # Adapters layer
+│   │   ├── in/                 # Input adapters (HTTP controllers)
+│   │   └── out/                # Output adapters (Database, External APIs)
+│   ├── app/                    # Application layer
+│   │   ├── services/           # Business logic services
+│   │   └── port/               # Ports (interfaces for external concerns)
+|   |        └── out/           # Output ports (interfaces for external concerns)
+|   |           └── use_case/   # Use cases (application logic)
+│   ├── domain/                 # Domain layer (core business logic)
+|   |-- util/                   # Utility functions
+│   └── index.ts                # Main entry point
+├── tests/                      # Test files
+├── .gitignore                  # Git ignore file
+├── package.json                # npm package configuration
+└── tsconfig.json               # TypeScript configuration
 ```
 
-## Components
+## Contributing
 
-- **Application Layer**: Contains use cases that define the application's behavior. These use cases interact with the domain layer through ports.
+Contributions are welcome! If you have any suggestions, improvements, or feature requests, feel free to open an issue or create a pull request.
 
-- **Domain Layer**: Defines the core business logic, including entities and value objects.
+## License
 
-- **Infrastructure Layer**: Contains adapters that implement ports defined in the application layer. Also includes the `main.ts` file where dependencies are wired together.
-
-- **Test Directory**: Corresponding test files for each component to ensure the correctness of the implementation.
-
-## How to Run
-
-1. Clone this repository.
-2. Install dependencies using `npm install`.
-3. Run the application using `npm start`.
-
-## Testing
-
-Run tests using `npm test` to ensure the correctness of the application logic.
-
-## Dependencies
-
-- Node.js
-- TypeScript
-- Jest (for testing)
-```
-
-Silakan sesuaikan dengan struktur proyek dan ketergantungan spesifik dari proyek TypeScript Hexagonal Architecture Anda.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
