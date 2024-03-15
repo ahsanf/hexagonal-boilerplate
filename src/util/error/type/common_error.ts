@@ -1,34 +1,35 @@
 import { ApplicationError } from "../application_error";
 
-const HTTPError = {
+
+const HTTPError = (customMessage?: string) => ({
   BAD_REQUEST: {
     type: ApplicationError.type.NETWORK,
     code: "BAD_REQUEST",
-    message: "Bad request",
+    message: customMessage ?? "Bad request",
     statusCode: 400,
   },
   UNAUTHORIZED: {
     type: ApplicationError.type.NETWORK,
     code: "UNAUTHORIZED",
-    message: "Unauthorized",
+    message: customMessage ?? "Unauthorized",
     statusCode: 401,
   },
   INVALID_DATA: {
     type: ApplicationError.type.NETWORK,
     code: "INVALID DATA",
-    message: "invalid data check it again",
+    message: customMessage ?? "Invalid data check it again",
     statusCode: 401,
   },
   FORBIDDEN: {
     type: ApplicationError.type.NETWORK,
     code: "FORBIDDEN",
-    message: "Forbidden",
+    message: customMessage ?? "Forbidden",
     statusCode: 403,
   },
   RESOURCE_NOT_FOUND: {
     type: ApplicationError.type.NETWORK,
     code: "RESOURCE_NOT_FOUND",
-    message: "Resource not found",
+    message: customMessage ?? "Resource not found",
     statusCode: 404,
     meta: {
       translationKey: "app.common.error.RESOURCE_NOT_FOUND",
@@ -38,7 +39,7 @@ const HTTPError = {
   INTERNAL_SERVER_ERROR: {
     type: ApplicationError.type.NETWORK,
     code: "INTERNAL_SERVER_ERROR",
-    message: "Something went wrong, Please try again later.",
+    message: customMessage ?? "Something went wrong, Please try again later.",
     statusCode: 500,
     meta: {
       shouldRedirect: true,
@@ -47,27 +48,33 @@ const HTTPError = {
   BAD_GATEWAY: {
     type: ApplicationError.type.NETWORK,
     code: "BAD_GATEWAY",
-    message: "Bad gateway",
+    message: customMessage ?? "Bad gateway",
     statusCode: 502,
   },
   SERVICE_UNAVAILABLE: {
     type: ApplicationError.type.NETWORK,
     code: "SERVICE_UNAVAILABLE",
-    message: "Service unavailable",
+    message: customMessage ?? "Service unavailable",
     statusCode: 503,
   },
   GATEWAY_TIMEOUT: {
     type: ApplicationError.type.NETWORK,
     code: "GATEWAY_TIMEOUT",
-    message: "Gateway timeout",
+    message: customMessage ?? "Gateway timeout",
     statusCode: 504,
   },
   NOT_FOUND: {
     type: ApplicationError.type.NETWORK,
     code: "NOT_FOUND",
-    message: "object not found",
+    message: customMessage ?? "Object not found",
     statusCode: 504,
   },
-};
+  UNPROCESSABLE_ENTITY: {
+    type: ApplicationError.type.INVALIDDATA,
+    code: "UNPROCESSABLE_ENTITY",
+    message: customMessage ?? "We could not process your request",
+    statusCode: 422,
+  }
+});
 
 export { HTTPError };

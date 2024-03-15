@@ -7,10 +7,13 @@ import { DomainController } from './src/adapter/in/rest/domain/controller/contro
 import cookieParser from 'cookie-parser';
 import { loggingMiddleware } from './src/util/logger/logging';
 import { initMysql } from './src/util/mysql/mysql';
+import { initMongo } from './src/util/mongodb/mongodb';
+import { config } from './config/config';
 
 const app: Express = express()
-const port = process.env.APP_PORT ?? 9010
-const appName = process.env.APP_NAME ?? 'app-name'
+const port = config.app.appPort
+const apiVersion = config.app.apiVersion
+const appName = config.app.appName
 
 dotenv.config()
 app.use(bodyparser.json())
@@ -21,13 +24,27 @@ app.use(cookieParser())
 app.use(loggingMiddleware)
 
 initMysql()
+initMongo()
 
-const domainController = new DomainController(app, 'v1')
+const domainController = new DomainController(app, apiVersion)
 
 domainController.init()
 
 app.get('/', (_: Request, res: Response) => {
-    res.send('Hello World!')
+    res.send(`
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <pre>
+    
+        ██╗  ██╗███████╗██╗  ██╗ █████╗  ██████╗  ██████╗ ███╗   ██╗ █████╗ ██╗         ██████╗  ██████╗ ██╗██╗     ███████╗██████╗ ██████╗ ██╗      █████╗ ████████╗███████╗
+        ██║  ██║██╔════╝╚██╗██╔╝██╔══██╗██╔════╝ ██╔═══██╗████╗  ██║██╔══██╗██║         ██╔══██╗██╔═══██╗██║██║     ██╔════╝██╔══██╗██╔══██╗██║     ██╔══██╗╚══██╔══╝██╔════╝
+        ███████║█████╗   ╚███╔╝ ███████║██║  ███╗██║   ██║██╔██╗ ██║███████║██║         ██████╔╝██║   ██║██║██║     █████╗  ██████╔╝██████╔╝██║     ███████║   ██║   █████╗  
+        ██╔══██║██╔══╝   ██╔██╗ ██╔══██║██║   ██║██║   ██║██║╚██╗██║██╔══██║██║         ██╔══██╗██║   ██║██║██║     ██╔══╝  ██╔══██╗██╔═══╝ ██║     ██╔══██║   ██║   ██╔══╝  
+        ██║  ██║███████╗██╔╝ ██╗██║  ██║╚██████╔╝╚██████╔╝██║ ╚████║██║  ██║███████╗    ██████╔╝╚██████╔╝██║███████╗███████╗██║  ██║██║     ███████╗██║  ██║   ██║   ███████╗
+        ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
+                                                                         
+        </pre>
+    </div>
+    `)
 })
 
 app.listen(port, () => {

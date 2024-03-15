@@ -1,7 +1,8 @@
+import { config } from "../../../config/config";
 import { decryptData, encryptData } from "../encrypt/encryption";
 import jwt, { Secret } from "jsonwebtoken";
 
-const secretKey: Secret = process.env.APP_SALT ?? "";
+const secretKey: Secret = config.app.appSalt;
 
 export type JwtPayload  = {
   id: string

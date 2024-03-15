@@ -1,9 +1,10 @@
 import { createCipheriv, createDecipheriv, createHash } from "crypto"
 import { logger } from "../logger/logger";
+import { config } from "../../../config/config";
 
-const secretKey: string = process.env.APP_SALT ?? "";
-const secretKeyIv: string = process.env.APP_SALT_IV ?? "";
-const encryptMethod: string = process.env.APP_ENCRYPT_METHOD ?? "";
+const secretKey: string = config.app.appSalt;
+const secretKeyIv: string = config.app.appSaltIv;
+const encryptMethod: string = config.app.appEncryptMethod;
 
 if(secretKey === "" || secretKeyIv === "" || encryptMethod === "") {
   throw new Error('Secret key required')
@@ -26,7 +27,7 @@ export const encryptData = async (data: string): Promise<string> => {
   encrypted += cipher.final('hex')
 
   return Buffer.from(encrypted).toString('base64')
-  
+
 }
 
 export const decryptData = async (encryptedData: string): Promise<string> => {
@@ -35,6 +36,6 @@ export const decryptData = async (encryptedData: string): Promise<string> => {
   const decipher = createDecipheriv(encryptMethod, key, encryptIv)
   let decrypted = decipher.update(buff.toString('utf8'), 'hex', 'utf8')
   decrypted += decipher.final('utf8')
-  
+
   return decrypted
 }
