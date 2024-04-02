@@ -14,6 +14,7 @@ const APP_SALT_IV = process.env.APP_SALT_IV ?? ''
 const APP_ENCRYPT_METHOD = process.env.APP_ENCRYPT_METHOD ?? ''
 const API_VERSION = process.env.API_VERSION ?? ''
 const APP_COOKIE_URL = process.env.APP_COOKIE_URL ?? ''
+const APP_NAME = process.env.APP_NAME ?? ''
 
 const MAIL_HOST = process.env.MAIL_HOST ?? ''
 const MAIL_PORT = process.env.MAIL_PORT ?? ''
@@ -32,6 +33,11 @@ const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD ?? ''
 const REDIS_URL = process.env.REDIS_URL ?? ''
 const REDIS_ENABLE = process.env.REDIS_ENABLE ?? false
 
+const RABBIT_MQ_HOST = process.env.RABBIT_MQ_HOST ?? ''
+const RABBIT_MQ_PORT = process.env.RABBIT_MQ_PORT ?? ''
+const RABBIT_MQ_USER = process.env.RABBIT_MQ_USER ?? ''
+const RABBIT_MQ_PASSWORD = process.env.RABBIT_MQ_PASSWORD ?? ''
+
 const APP_CONFIG = {
   appPort: APP_PORT,
   appSalt: APP_SALT,
@@ -39,6 +45,7 @@ const APP_CONFIG = {
   appEncryptMethod: APP_ENCRYPT_METHOD,
   apiVersion: API_VERSION,
   appCookieUrl: APP_COOKIE_URL,
+  appName: APP_NAME,
   redisEnable: REDIS_ENABLE,
 }
 
@@ -82,9 +89,16 @@ const REDIS_CONFIG = {
   url: REDIS_URL,
 }
 
+const RABBIT_MQ_CONFIG = {
+  host: RABBIT_MQ_HOST,
+  port: RABBIT_MQ_PORT,
+  user: RABBIT_MQ_USER,
+  password: RABBIT_MQ_PASSWORD,
+}
 export const config: any = {
   app: APP_CONFIG,
   server: SERVER_CONFIG,
+  rabbitMq: RABBIT_MQ_CONFIG,
   database: {
     mysql : MYSQL_CONFIG,
     mongo: MONGO_CONFIG,

@@ -9,6 +9,11 @@ This repository provides a boilerplate for implementing a Hexagonal Architecture
 - **Dependency Injection**: Implementing dependency injection to decouple components and facilitate testing.
 - **Test-Driven Development (TDD)**: Encouraging the practice of TDD to ensure code quality and reliability.
 - **Ready-to-Use Structure**: Provides a basic structure to kickstart your project development.
+- **MySQL Service**: Integrates a MySQL service for relational database management.
+- **MongoDB Service**: Includes a MongoDB service for NoSQL database management.
+- **RabbitMQ Service**: Incorporates a RabbitMQ service for message queueing and asynchronous communication.
+- **JWT Utility**: Provides a utility for JSON Web Token (JWT) generation and verification for secure authentication and authorization.
+- **Logger Service**: Implements a logger service for centralized logging and better debugging capabilities.
 
 ## Getting Started
 
