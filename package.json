@@ -19,12 +19,14 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@types/amqplib": "^0.10.5",
     "@types/cookie-parser": "^1.4.5",
     "@types/cors": "^2.8.15",
     "@types/express-fileupload": "^1.4.3",
     "@types/express-validator": "^3.0.0",
     "@types/uuid": "^9.0.5",
     "@types/winston": "^2.4.4",
+    "amqplib": "^0.10.3",
     "body-parser": "^1.20.2",
     "concurrently": "^8.2.2",
     "cookie-parser": "^1.4.6",
@@ -35,6 +37,7 @@
     "jsonwebtoken": "^9.0.2",
     "knex": "^3.0.1",
     "mongodb": "^6.5.0",
+    "nodemon": "^3.1.0",
     "uuid": "^9.0.1",
     "winston": "^3.11.0"
   },

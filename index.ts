@@ -9,6 +9,7 @@ import { loggingMiddleware } from './src/util/logger/logging';
 import { initMysql } from './src/util/mysql/mysql';
 import { initMongo } from './src/util/mongodb/mongodb';
 import { config } from './config/config';
+import { initRabbitMQ } from './src/util/rabbitmq/rabbitmq';
 
 const app: Express = express()
 const port = config.app.appPort
@@ -23,8 +24,11 @@ app.use(cookieParser())
 
 app.use(loggingMiddleware)
 
+// Init configuration
 initMysql()
 initMongo()
+initRabbitMQ()
+
 
 const domainController = new DomainController(app, apiVersion)
 
