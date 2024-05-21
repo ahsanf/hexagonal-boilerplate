@@ -44,7 +44,7 @@
   "scripts": {
     "test": "jest dist/test",
     "build": "npx tsc",
-    "start": "node dist/index.ts",
+    "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "watch": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "knex": "knex"
