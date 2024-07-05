@@ -3,15 +3,13 @@ import express, { Express, Request, Response } from "express"
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
 import dotenv from "dotenv"
+import { DomainController } from './src/adapter/in/rest/domain/controller/controller';
 import cookieParser from 'cookie-parser';
 import { loggingMiddleware } from './src/util/logger/logging';
 import { initMysql } from './src/util/mysql/mysql';
 import { initMongo } from './src/util/mongodb/mongodb';
 import { config } from './config/config';
 import { initRabbitMQ } from './src/util/rabbitmq/rabbitmq';
-import { initFirebase } from './src/util/firebase/firebase';
-import { NotificationRestController } from './src/adapter/in/rest/notification/controller/controller';
-import { TokenizationRestController } from './src/adapter/in/rest/tokenization/controller/controller';
 
 const app: Express = express()
 const port = config.app.appPort
@@ -27,29 +25,27 @@ app.use(cookieParser())
 app.use(loggingMiddleware)
 
 // Init configuration
+initMysql()
 initMongo()
 initRabbitMQ()
-initFirebase()
 
-const notificationRestController = new NotificationRestController(app)
-notificationRestController.init()
 
-const tokenizationRestController =  new TokenizationRestController(app)
-tokenizationRestController.init()
+const domainController = new DomainController(app, apiVersion)
+
+domainController.init()
 
 app.get('/', (_: Request, res: Response) => {
     res.send(`
     <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
         <pre>
-            
-███╗   ██╗ ██████╗ ████████╗██╗███████╗██╗ ██████╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗     █████╗ ██████╗ ██╗
-████╗  ██║██╔═══██╗╚══██╔══╝██║██╔════╝██║██╔════╝██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║    ██╔══██╗██╔══██╗██║
-██╔██╗ ██║██║   ██║   ██║   ██║█████╗  ██║██║     ███████║   ██║   ██║██║   ██║██╔██╗ ██║    ███████║██████╔╝██║
-██║╚██╗██║██║   ██║   ██║   ██║██╔══╝  ██║██║     ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║    ██╔══██║██╔═══╝ ██║
-██║ ╚████║╚██████╔╝   ██║   ██║██║     ██║╚██████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║    ██║  ██║██║     ██║
-╚═╝  ╚═══╝ ╚═════╝    ╚═╝   ╚═╝╚═╝     ╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝     ╚═╝
-                                                                                                                
-                                                    
+    
+        ██╗  ██╗███████╗██╗  ██╗ █████╗  ██████╗  ██████╗ ███╗   ██╗ █████╗ ██╗         ██████╗  ██████╗ ██╗██╗     ███████╗██████╗ ██████╗ ██╗      █████╗ ████████╗███████╗
+        ██║  ██║██╔════╝╚██╗██╔╝██╔══██╗██╔════╝ ██╔═══██╗████╗  ██║██╔══██╗██║         ██╔══██╗██╔═══██╗██║██║     ██╔════╝██╔══██╗██╔══██╗██║     ██╔══██╗╚══██╔══╝██╔════╝
+        ███████║█████╗   ╚███╔╝ ███████║██║  ███╗██║   ██║██╔██╗ ██║███████║██║         ██████╔╝██║   ██║██║██║     █████╗  ██████╔╝██████╔╝██║     ███████║   ██║   █████╗  
+        ██╔══██║██╔══╝   ██╔██╗ ██╔══██║██║   ██║██║   ██║██║╚██╗██║██╔══██║██║         ██╔══██╗██║   ██║██║██║     ██╔══╝  ██╔══██╗██╔═══╝ ██║     ██╔══██║   ██║   ██╔══╝  
+        ██║  ██║███████╗██╔╝ ██╗██║  ██║╚██████╔╝╚██████╔╝██║ ╚████║██║  ██║███████╗    ██████╔╝╚██████╔╝██║███████╗███████╗██║  ██║██║     ███████╗██║  ██║   ██║   ███████╗
+        ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
+                                                                         
         </pre>
     </div>
     `)
