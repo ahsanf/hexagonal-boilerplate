@@ -1,5 +1,5 @@
-import { Stats } from "../../../../../domain/stats"
-import { Domain } from "../../../../../domain/domain"
+import { Stats } from "@domain/stats"
+import { Domain } from "@domain/domain"
 import { DomainRequest } from "../entity/request"
 import { RestResponse } from "../entity/response"
 

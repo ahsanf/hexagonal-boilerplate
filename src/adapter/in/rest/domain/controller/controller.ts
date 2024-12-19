@@ -1,10 +1,10 @@
 
 import { Express, Request, Response } from "express"
-import { DomainService } from "../../../../../app/service/domain_service"
+import { DomainService } from "@service/domain_service"
 import { errorHandler } from "../util/error_handler"
 import { RestResponse } from "../entity/response"
 import { dataToRestResponse } from "../util/converter"
-import { BaseController } from "../../../../../common/base_controller"
+import { BaseController } from "@common/base_controller"
 
 export class DomainController implements BaseController {
   private app: Express

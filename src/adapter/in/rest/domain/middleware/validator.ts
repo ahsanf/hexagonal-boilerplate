@@ -1,6 +1,6 @@
 import { check, oneOf, validationResult } from "express-validator"
 import { Request, Response, NextFunction } from "express"
-import { logger } from "../../../../../util/logger/logger"
+import { logger } from "@logger"
 
 //add some validation here
 export const validateLoginRequest =
