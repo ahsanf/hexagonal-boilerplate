@@ -10,7 +10,7 @@ const winstonLogger = createLogger({
         format.colorize(),
         format.timestamp(),
         format.printf(({timestamp, level, message, metadata}) => {
-          return `[${timestamp}] ${metadata.traceId} ${level}: ${message}`
+          return `[${timestamp}] ${(metadata as any).traceId} ${level}: ${message}`
         })
       )
     }),

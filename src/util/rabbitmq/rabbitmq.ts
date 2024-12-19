@@ -1,5 +1,5 @@
 import client, { Channel, Connection } from "amqplib"
-import { config } from "../../../config/config"
+import { config } from "@config"
 
 let connection!: Connection
 let channel!: Channel
