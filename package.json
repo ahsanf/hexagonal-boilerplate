@@ -2,7 +2,9 @@
   "name": "stocktree-auth-api",
   "main": "index.ts",
   "devDependencies": {
+    "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.15",
+    "@types/express": "^5.0.0",
     "@types/express-fileupload": "^1.4.3",
     "@types/jsonwebtoken": "^9.0.4",
     "@types/node": "^20.8.9",
@@ -12,6 +14,7 @@
     "express": "^4.18.2",
     "express-fileupload": "^1.4.1",
     "jsonwebtoken": "^9.0.2",
+    "tsc-alias": "^1.8.10",
     "typescript": "^5.2.2",
     "uuid": "^9.0.1"
   },
@@ -44,10 +47,10 @@
   },
   "scripts": {
     "test": "jest dist/test",
-    "build": "npx tsc",
+    "build": "npx tsc && npx tsc-alias",
     "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
-    "watch": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "dev": "concurrently \"npx tsc --watch\" \"npx tsc-alias --watch\" \"nodemon -q dist/index.js\"",
+    "watch": "concurrently \"npx tsc --watch\" \"npx tsc-alias --watch\" \"nodemon -q dist/index.js\"",
     "knex": "knex"
   },
   "author": "ahsanf",

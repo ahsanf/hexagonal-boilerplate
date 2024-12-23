@@ -3,12 +3,12 @@ import { Request, Response, NextFunction } from 'express';
 import { ApplicationError } from '../error/application_error';
 import { HTTPError } from '../error/type/common_error';
 import { formatError } from '../error/format_error';
-import { config } from '../../../config/config';
+import { config } from '@config';
 
 const secretKey: Secret = config.app.appSalt;
 let applicationError: ApplicationError
 
-export const authMiddleware =  (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware =  (req: any, res: any, next: any) => {
   (async () => {
     try {
       const token: string = req.cookies.accessToken !== undefined ? req.cookies.accessToken.token : req.query.accessToken?.toString();
