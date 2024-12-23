@@ -1,7 +1,7 @@
 import { UserMysqlEntity } from "../entity/domain";
 import { IDomainMysqlRepository } from "./base_repository";
-import { logger } from "../../../../../util/logger/logger";
-import { getMysqlClient } from "../../../../../util/mysql/mysql";
+import { logger } from "@logger";
+import { getMysqlClient } from "@mysql";
 
 export class DomainMysqlRepository implements IDomainMysqlRepository {
   private tableName: string = "users";

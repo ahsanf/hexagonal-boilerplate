@@ -1,4 +1,4 @@
-import { logger } from "../../../../../util/logger/logger";
+import { logger } from "@logger";
 import { IDomainMysqlAdapter } from "./base_adapter";
 
 export class DomainMysqlAdapter implements IDomainMysqlAdapter {
