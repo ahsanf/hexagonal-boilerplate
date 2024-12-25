@@ -1,4 +1,4 @@
-import { config } from "@config";
+import { config } from "src/config/config";
 import { decryptData, encryptData } from "../encrypt/encryption";
 import jwt, { Secret } from "jsonwebtoken";
 

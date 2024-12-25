@@ -1,6 +1,6 @@
 import type { Knex } from "knex";
 import dotenv from 'dotenv'; 
-import { config as appConfig } from "./config/config";
+import { config as appConfig } from "./src/config/config";
 // Update with your config settings.
 dotenv.config();
 
