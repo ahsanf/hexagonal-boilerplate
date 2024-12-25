@@ -1,5 +1,5 @@
 import knex from "knex"
-import { config } from "@config"
+import { config } from "src/config/config"
 
 export const getMysqlClient = () => knex(config.database.mysql)
 

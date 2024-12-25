@@ -1,6 +1,6 @@
 import { createCipheriv, createDecipheriv, createHash } from "crypto"
 import { logger } from "../logger/logger";
-import { config } from "@config";
+import { config } from "src/config/config";
 
 const secretKey: string = config.app.appSalt;
 const secretKeyIv: string = config.app.appSaltIv;

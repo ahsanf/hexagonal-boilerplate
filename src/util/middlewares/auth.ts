@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { ApplicationError } from '../error/application_error';
 import { HTTPError } from '../error/type/common_error';
 import { formatError } from '../error/format_error';
-import { config } from '@config';
+import { config } from 'src/config/config';
 
 const secretKey: Secret = config.app.appSalt;
 let applicationError: ApplicationError

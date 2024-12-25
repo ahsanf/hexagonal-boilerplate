@@ -43,11 +43,20 @@
         "src/domain/*"
       ],
       "@config": [
-        "config/config"
+        "src/config/config"
       ],
-      "@controller": [
-        "src/adapter/in/rest/domain/controller/controller"
+      "@adapter_in/*": [
+        "src/adapter/in/*"
       ],
+      "@adapter_out/*": [
+        "src/adapter/out/*"
+      ],
+      "@use_case/*":[
+        "src/app/port/out/*"
+      ],
+      "@util/*":[
+        "src/util/*"
+      ]
     }, /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */

@@ -14,12 +14,6 @@ const HTTPError = (customMessage?: string) => ({
     message: customMessage ?? "Unauthorized",
     statusCode: 401,
   },
-  INVALID_DATA: {
-    type: ApplicationError.type.NETWORK,
-    code: "INVALID DATA",
-    message: customMessage ?? "Invalid data check it again",
-    statusCode: 401,
-  },
   FORBIDDEN: {
     type: ApplicationError.type.NETWORK,
     code: "FORBIDDEN",

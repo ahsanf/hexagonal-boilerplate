@@ -3,13 +3,14 @@ import express, { Express, Request, Response } from "express"
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
 import dotenv from "dotenv"
-import { DomainController } from '@controller';
+
 import cookieParser from 'cookie-parser';
 import { loggingMiddleware } from './src/util/logger/logging';
 import { initMysql } from './src/util/mysql/mysql';
 import { initMongo } from './src/util/mongodb/mongodb';
-import { config } from '@config';
+import { config } from 'src/config/config';
 import { initRabbitMQ } from './src/util/rabbitmq/rabbitmq';
+import { DomainController } from '@adapter_in/rest/domain/controller/controller';
 
 const app: Express = express()
 const port = config.app.appPort
