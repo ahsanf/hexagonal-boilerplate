@@ -1,7 +1,7 @@
 import jwt, { Secret } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import { ApplicationError } from '../error/application_error';
-import { HTTPError } from '../error/type/common_error';
+import { HttpError } from '../error/type/http_error';
 import { formatError } from '../error/format_error';
 import { config } from 'src/config/config';
 
@@ -13,13 +13,13 @@ export const authMiddleware =  (req: any, res: any, next: any) => {
     try {
       const token: string = req.cookies.accessToken !== undefined ? req.cookies.accessToken.token : req.query.accessToken?.toString();
       if (!token) {
-        applicationError = new ApplicationError(HTTPError('Access token required').UNAUTHORIZED);
+        applicationError = new ApplicationError(HttpError('Access token required').UNAUTHORIZED);
         res.status(403).json(formatError(applicationError));
         return
       } else {
         jwt.verify(token, secretKey, (error, decoded) => {
           if (error) {
-            applicationError = new ApplicationError(HTTPError('Invalid access token').UNAUTHORIZED);
+            applicationError = new ApplicationError(HttpError('Invalid access token').UNAUTHORIZED);
             applicationError.message = error.message;
             res.status(401).json(formatError(applicationError));
             return
@@ -31,7 +31,7 @@ export const authMiddleware =  (req: any, res: any, next: any) => {
       }
 
     } catch (err: any) {
-      applicationError = new ApplicationError(HTTPError().UNAUTHORIZED);
+      applicationError = new ApplicationError(HttpError().UNAUTHORIZED);
       applicationError.message = err.message;
       res.status(401).json(formatError(applicationError));
     }
