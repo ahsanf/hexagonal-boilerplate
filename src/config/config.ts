@@ -2,11 +2,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const DB_HOST = process.env.DB_HOST ?? ''
-const DB_NAME = process.env.DB_NAME ?? ''
-const DB_USERNAME = process.env.DB_USERNAME ?? ''
-const DB_PASSWORD = process.env.DB_PASSWORD ?? ''
-const DB_PORT = process.env.DB_PORT ?? ''
+const MYSQL_DB_HOST = process.env.MYSQL_DB_HOST ?? ''
+const MYSQL_DB_NAME = process.env.MYSQL_DB_NAME ?? ''
+const MYSQL_DB_USERNAME = process.env.MYSQL_DB_USERNAME ?? ''
+const MYSQL_DB_PASSWORD = process.env.MYSQL_DB_PASSWORD ?? ''
+const MYSQL_DB_PORT = process.env.MYSQL_DB_PORT ?? ''
 
 const APP_PORT = process.env.APP_PORT ?? ''
 const APP_SALT = process.env.APP_SALT ?? ''
@@ -58,10 +58,10 @@ const SERVER_CONFIG = {
 const MYSQL_CONFIG = {
   client: 'mysql',
   connection: {
-    host: DB_HOST,
-    user: DB_USERNAME,
-    password: DB_PASSWORD,
-    database: DB_NAME,
+    host: MYSQL_DB_HOST,
+    user: MYSQL_DB_USERNAME,
+    password: MYSQL_DB_PASSWORD,
+    database: MYSQL_DB_NAME,
   },
   migrations: {
     tableName: 'knex_migrations',

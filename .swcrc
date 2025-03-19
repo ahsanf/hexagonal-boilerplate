@@ -1,0 +1,39 @@
+{
+  "jsc": {
+    "target": "esnext",
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "decorators": false,
+      "dynamicImport": true
+    },
+    "transform": {
+      "optimizer": {
+        "globals": {
+          "vars": {
+            "__DEBUG__": "false"
+          }
+        }
+      }
+    },
+    "baseUrl": "./",
+    "paths": {
+      "@common/*": ["src/common/*"],
+      "@service/*": ["src/app/service/*"],
+      "@logger": ["src/util/logger/logger"],
+      "@mysql": ["src/util/mysql/mysql"],
+      "@domain/*": ["src/domain/*"],
+      "@config": ["src/config/config"],
+      "@adapter_in/*": ["src/adapter/in/*"],
+      "@adapter_out/*": ["src/adapter/out/*"],
+      "@use_case/*": ["src/app/port/out/*"],
+      "@util/*": ["src/util/*"]
+    }
+  },
+  "module": {
+    "type": "commonjs"
+  },
+  "sourceMaps": true,
+  "minify": false,
+  "isModule": true
+}
