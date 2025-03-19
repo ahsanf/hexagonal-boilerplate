@@ -8,7 +8,7 @@ import { config } from 'src/config/config';
 const secretKey: Secret = config.app.appSalt;
 let applicationError: ApplicationError
 
-export const authMiddleware =  (req: any, res: any, next: any) => {
+export const globalAuthMiddleware =  (req: any, res: any, next: any) => {
   (async () => {
     try {
       const token: string = req.cookies.accessToken !== undefined ? req.cookies.accessToken.token : req.query.accessToken?.toString();
