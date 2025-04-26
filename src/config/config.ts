@@ -38,6 +38,12 @@ const RABBIT_MQ_PORT = process.env.RABBIT_MQ_PORT ?? ''
 const RABBIT_MQ_USER = process.env.RABBIT_MQ_USER ?? ''
 const RABBIT_MQ_PASSWORD = process.env.RABBIT_MQ_PASSWORD ?? ''
 
+const PG_HOST = process.env.PG_HOST ?? ''
+const PG_PORT = process.env.PG_PORT ?? ''
+const PG_USER = process.env.PG_USER ?? ''
+const PG_PASSWORD = process.env.PG_PASSWORD ?? ''
+
+
 const APP_CONFIG = {
   appPort: APP_PORT,
   appSalt: APP_SALT,
@@ -69,6 +75,20 @@ const MYSQL_CONFIG = {
   },
   debug: true,
 };
+
+const PG_CONFIG = {
+  client: 'pg',
+  connection: {
+    host: PG_HOST,
+    user: PG_USER,
+    password: PG_PASSWORD,
+  },
+  migrations: {
+    tableName: 'knex_migrations',
+    extension: 'ts',
+  },
+  debug: true,
+}
 
 const MAIL_CONFIG = {
   host: MAIL_HOST,
@@ -103,6 +123,7 @@ export const config: any = {
     mysql : MYSQL_CONFIG,
     mongo: MONGO_CONFIG,
     redis: REDIS_CONFIG,
+    pg: PG_CONFIG,
   },
   mail: MAIL_CONFIG,
 };
