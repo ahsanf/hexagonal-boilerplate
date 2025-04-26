@@ -42,6 +42,9 @@ const PG_HOST = process.env.PG_HOST ?? ''
 const PG_PORT = process.env.PG_PORT ?? ''
 const PG_USER = process.env.PG_USER ?? ''
 const PG_PASSWORD = process.env.PG_PASSWORD ?? ''
+const PG_DATABASE = process.env.PG_DATABASE ?? ''
+
+
 
 
 const APP_CONFIG = {
@@ -82,6 +85,8 @@ const PG_CONFIG = {
     host: PG_HOST,
     user: PG_USER,
     password: PG_PASSWORD,
+    database: PG_DATABASE,
+    port: PG_PORT || 5432,
   },
   migrations: {
     tableName: 'knex_migrations',
