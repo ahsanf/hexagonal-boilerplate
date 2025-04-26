@@ -11,6 +11,7 @@ import { initMongo } from './src/util/mongodb/mongodb';
 import { config } from 'src/config/config';
 import { initRabbitMQ } from './src/util/rabbitmq/rabbitmq';
 import { DomainController } from '@adapter_in/rest/domain/controller/controller';
+import { initPostgres } from '@util/postgres/postgres';
 
 const app: Express = express()
 const port = config.app.appPort
@@ -29,6 +30,7 @@ app.use(loggingMiddleware)
 // initMysql()
 // initMongo()
 // initRabbitMQ()
+// initPostgres()
 
 // const domainController = new DomainController(app, apiVersion)
 
