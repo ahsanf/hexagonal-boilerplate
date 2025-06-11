@@ -5,7 +5,7 @@ import { ApplicationError } from "../error/application_error";
 import { HttpError } from "@util/error/type/http_error"; 
 
 const redisUrl = config.database.redis.url;
-const isRedisEnable = config.app.redisEnable === 'true';
+const isRedisEnable = config.app.redisEnable;
 export const client = isRedisEnable === true ? createClient(redisUrl ? { url: redisUrl, pingInterval: 3000 } : undefined) : null;
 
 export const initRedis = () => {
