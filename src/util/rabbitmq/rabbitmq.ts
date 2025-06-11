@@ -1,23 +1,26 @@
-import client, { Channel, Connection } from "amqplib"
-import { config } from "src/config/config"
+import * as amqplib from 'amqplib';
+import { config } from '@config';
 
-let connection!: Connection
-let channel!: Channel
-let connected: boolean
+type AmqpConnection = ReturnType<typeof amqplib.connect> extends Promise<infer T> ? T : never;
+type AmqpChannel = ReturnType<AmqpConnection['createChannel']> extends Promise<infer T> ? T : never;
 
-export const initRabbitMQ = async () => {
-  if (connected && channel) return;
+let connection: AmqpConnection | null = null;
+let channel: AmqpChannel | null = null;
 
+export async function initRabbitMQ() {
   try {
-    connection = await client.connect(
-      `amqp://${config.rabbitMq.user}:${config.rabbitMq.password}@${config.rabbitMq.host}:${config.rabbitMq.port}`
-    )
-  
-    channel = await connection.createChannel()
-    connected = true
-    console.log("RabbitMQ connected")
+    connection = await amqplib.connect(`amqp://${config.rabbitMq.user}:${config.rabbitMq.password}@${config.rabbitMq.host}:${config.rabbitMq.port}`);
+    channel = await connection.createChannel();
+    console.log('RabbitMQ Connected');
+    
+    return { connection, channel };
   } catch (error) {
-    console.log("RabbitMQ connection failed")
-    console.log(error)
+    console.error('❌ Error connecting to RabbitMQ:', error);
+    throw error;
   }
+}
+
+export function getChannel() {
+  if (!channel) throw new Error('RabbitMQ channel not initialized');
+  return channel;
 }
