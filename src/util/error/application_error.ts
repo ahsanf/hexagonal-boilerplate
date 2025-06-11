@@ -5,6 +5,7 @@ export class ApplicationError extends Error {
     NETWORK: "NETWORK",
     UNKNOWN: "UNKNOWN",
     INVALIDDATA: "INVALID DATA",
+    APP: "APP",
   };
   /**
    * attributes declaration **
