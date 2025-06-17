@@ -32,9 +32,7 @@ app.use(loggingMiddleware)
 // initRabbitMQ()
 // initPostgres()
 
-// const domainController = new DomainController(app, apiVersion)
-
-// domainController.init()
+// new DomainController(app, apiVersion).init()
 
 app.get('/', (_: Request, res: Response) => {
     res.send(`

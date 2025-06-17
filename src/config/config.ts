@@ -67,7 +67,10 @@ const MONGO_CONFIG = {
   host: getEnv('MONGO_DB_HOST'),
   user: getEnv('MONGO_DB_USER'),
   password: getEnv('MONGO_DB_PASSWORD'),
+  preUrl: getEnv('MONGO_DB_PRE_URL', 'mongodb+srv://'),
 };
+
+const MONGO_URL = `${MONGO_CONFIG.preUrl}${MONGO_CONFIG.user}:${MONGO_CONFIG.password}@${MONGO_CONFIG.host}`;
 
 const REDIS_CONFIG = {
   url: getEnv('REDIS_URL'),
@@ -86,7 +89,10 @@ export const config = {
   rabbitMq: RABBIT_MQ_CONFIG,
   database: {
     mysql: MYSQL_CONFIG,
-    mongo: MONGO_CONFIG,
+    mongo: {
+      ...MONGO_CONFIG,
+      url: MONGO_URL,
+    },
     redis: REDIS_CONFIG,
     pg: PG_CONFIG,
   },
