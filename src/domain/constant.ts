@@ -8,3 +8,7 @@ export const COMMON = {
   ASC: 'asc',
   DESC: 'desc',
 }
+
+export const COLLECTION = {
+  
+}
