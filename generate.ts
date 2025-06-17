@@ -428,7 +428,7 @@ import { globalAuthMiddleware } from "@util/middlewares/auth";
 import { I${domainCamel}UseCase } from "@use_case/${domainSnake}_use_case";
 import { ${domainCamel}Service } from "@service/${domainSnake}_service";
 
-export class ${domainCamel}rRestController implements BaseController {
+export class ${domainCamel}RestController implements BaseController {
   private app: Express;
   private readonly prefix: string = "/${domainUrl}s";
   private service: I${domainCamel}UseCase;
