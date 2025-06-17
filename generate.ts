@@ -3,7 +3,7 @@ const fs = require("fs");
 import { readFileSync, writeFileSync, renameSync } from "fs";
 const argv = process.argv;
 
-// --- Parse CLI Args ---
+// Usage bun run generate.ts --domain=User --domainFile=user.ts --mongoEntityFile=user_mongo.ts
 const args = Object.fromEntries(
   argv.slice(2).map(arg => {
     const [key, val] = arg.replace(/^--/, "").split("=");
@@ -424,8 +424,7 @@ import { queryToFilter } from "../util/converter";
 import { getLogTraceId } from "@logger";
 import { dataToRestResponse } from "@util/converter/global_converter";
 import { errorHandler } from "@util/error/error_handler";
-import { permissionObaMiddleware } from "@util/middlewares/permission";
-import { globalAuthMiddleware } from "@util/middlewares/global_auth";
+import { globalAuthMiddleware } from "@util/middlewares/auth";
 import { I${domainCamel}UseCase } from "@use_case/${domainSnake}_use_case";
 import { ${domainCamel}Service } from "@service/${domainSnake}_service";
 
@@ -440,11 +439,11 @@ export class ${domainCamel}rRestController implements BaseController {
   }
 
   init(): void {
-    this.app.get(this.prefix, globalAuthMiddleware, permissionObaMiddleware, this.getAll.bind(this));
-    this.app.get(this.prefix + '/:id', globalAuthMiddleware, permissionObaMiddleware, this.getById.bind(this));
-    this.app.post(this.prefix, globalAuthMiddleware, permissionObaMiddleware, this.create.bind(this));
-    this.app.put(this.prefix + '/:id', globalAuthMiddleware, permissionObaMiddleware, this.update.bind(this));
-    this.app.delete(this.prefix + '/:id', globalAuthMiddleware, permissionObaMiddleware, this.delete.bind(this));
+    this.app.get(this.prefix, globalAuthMiddleware, this.getAll.bind(this));
+    this.app.get(this.prefix + '/:id', globalAuthMiddleware, this.getById.bind(this));
+    this.app.post(this.prefix, globalAuthMiddleware, this.create.bind(this));
+    this.app.put(this.prefix + '/:id', globalAuthMiddleware, this.update.bind(this));
+    this.app.delete(this.prefix + '/:id', globalAuthMiddleware, this.delete.bind(this));
   }
 
   async getAll(req: Request, res: Response): Promise<void> {
@@ -456,7 +455,7 @@ export class ${domainCamel}rRestController implements BaseController {
       res.json(dataToRestResponse(data, stats));
       
     } catch (error) {
-      errorHandler(error, req, res)
+      errorHandler(error, res)
     }
   }
 
@@ -465,7 +464,7 @@ export class ${domainCamel}rRestController implements BaseController {
       const data = await this.service.getById(req.params.id, getLogTraceId());
       res.json(dataToRestResponse(data));
     } catch (error) {
-      errorHandler(error, req, res);
+      errorHandler(error, res);
     }
   }
 
@@ -474,7 +473,7 @@ export class ${domainCamel}rRestController implements BaseController {
       const data = await this.service.create(req.body, getLogTraceId());
       res.status(201).json(dataToRestResponse(data));
     } catch (error) {
-      errorHandler(error, req, res);
+      errorHandler(error, res);
     }
   }
   async update(req: Request, res: Response): Promise<void> {
@@ -482,7 +481,7 @@ export class ${domainCamel}rRestController implements BaseController {
       const data = await this.service.update(req.params.id, req.body, getLogTraceId());
       res.json(dataToRestResponse(data));
     } catch (error) {
-      errorHandler(error, req, res);
+      errorHandler(error, res);
     }
   }
 
@@ -491,7 +490,7 @@ export class ${domainCamel}rRestController implements BaseController {
       const result = await this.service.delete(req.params.id, getLogTraceId());
       res.json(dataToRestResponse(result));
     } catch (error) {
-      errorHandler(error, req, res);
+      errorHandler(error, res);
     }
   }
 }
